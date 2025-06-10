@@ -1,6 +1,5 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -16,7 +15,8 @@ var_name_of_order = st.text_input('Name of Order:')
 st.write('The name of your order will be:', var_name_of_order)
 
 # LAB 2: create multiselect and show selection
-session = get_active_session()
+cnx = st.connection("snowflake")
+session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select (col('fruit_name'))
 
 st.subheader(":exclamation: LAB 2 - Multiselect")
