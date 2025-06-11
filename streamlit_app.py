@@ -33,12 +33,9 @@ if ingredients_list:
 
     for var_fruit_chosen in ingredients_list:
         ingredients_string +=   var_fruit_chosen + ' '
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + var_fruit_chosen)
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
     
-    #show the variable  content
-    #st.write(ingredients_string)
-
     # create a sql statement with python
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
             values ('""" + ingredients_string + """','""" + var_name_of_order + """')"""
